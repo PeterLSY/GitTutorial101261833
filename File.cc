@@ -1,24 +1,26 @@
-#ifndef FILE_H
-#define FILE_H
+#include "File.h"
+#include <iostream>
 
-#include <string>
-#include "Date.h"
+// Constructor
+File::File(std::string name, std::string content, Date& date)
+    : name(name), content(content), date(date) {}
 
-class File {
-public:
-    // Constructor
-    File(std::string name, std::string content, Date& date);
+// lessThan function
+bool File::lessThan(File& other) {
+    return date.lessThan(other.date);
+}
 
-    // Functions
-    bool lessThan(File& other);
-    void print();
-    void printContents();
+// print function
+void File::print() {
+    std::cout << "File: " << name << std::endl;
+    std::cout << "Date added: ";
+    date.print();
+    std::cout << std::endl;
+}
 
-private:
-    // Member variables
-    std::string name;
-    std::string content;
-    Date date;  // Indicates when the File was last modified
-};
-
-#endif
+// printContents function
+void File::printContents() {
+    print();
+    std::cout << "Content:" << std::endl;
+    std::cout << content << std::endl;
+}

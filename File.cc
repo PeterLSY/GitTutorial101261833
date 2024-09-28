@@ -1,49 +1,24 @@
-#include "File.h"
+#ifndef FILE_H
+#define FILE_H
 
-// Constructor
-File::File(const string& name, const string& content, Date& date)
-    : name(name), content(content), lastModified(date) {}
+#include <string>
+#include "Date.h"
 
-// Getters
-string File::getName() const {
-    return name;
-}
+class File {
+public:
+    // Constructor
+    File(std::string name, std::string content, Date& date);
 
-string File::getContent() const {
-    return content;
-}
+    // Functions
+    bool lessThan(File& other);
+    void print();
+    void printContents();
 
-Date File::getDate() const {
-    return lastModified;
-}
+private:
+    // Member variables
+    std::string name;
+    std::string content;
+    Date date;  // Indicates when the File was last modified
+};
 
-// Comparison function
-bool File::lessThan(const File& otherFile) const {
-    return lastModified.lessThan(otherFile.getDate());
-}
-
-// Print file metadata (name and date)
-void File::print() const {
-    // Debug print statement
-    cout << "Debug: Printing file metadata" << endl;
-
-    cout << "File: " << name << endl;
-    cout << "Last modified: ";
-    lastModified.print();
-    cout << endl;
-}
-
-// Print file metadata and content
-void File::printContents() const {
-    // Debug print statement
-    cout << "Debug: Printing file contents" << endl;
-
-    // First, print the metadata (name and date)
-    cout << "File: " << name << endl;
-    cout << "Last modified: ";
-    lastModified.print();
-    cout << endl;
-
-    // Then, print the file content
-    cout << "Content: " << endl << content << endl;
-}
+#endif
